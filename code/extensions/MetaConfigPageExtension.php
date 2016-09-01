@@ -203,7 +203,7 @@ class MetaConfigPageExtension extends DataExtension
     {
         $siteConfig = $this->getSiteConfig();
         if (!$this->image) {
-            if (is_callable([$this->owner, 'getPageImage'])) {
+            if (method_exists($this->owner, 'getPageImage')) {
                 $this->image = $this->owner->getPageImage();
             } else {
                 $this->image = $siteConfig->Image();
