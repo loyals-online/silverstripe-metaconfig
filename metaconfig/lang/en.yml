@@ -1,0 +1,22 @@
+en:
+  MetaManager:
+    GENERATEMETADATA: 'Generate Meta-data automatically from the page content'
+  SiteConfig:
+    OrganizationDetails: 'Organization details'
+    Organization: Organization
+    BusinessType: 'Business type'
+    Address: Address
+    Postcode: Postcode
+    City: City
+    Phonenumber: 'Phone number'
+    EmailAddress: 'Emailaddress'
+    TwitterUser: 'Twitter username'
+    SocialMedia: 'Social media'
+    FacebookPageLink: 'Facebook page link'
+    TwitterLink: 'Twitter link'
+    YoutubeLink: 'Youtube channel link'
+    Google: Google
+    GoogleAnalyticsID: Google Analytics ID
+    GoogleTagManagerID: Google Tag Manager ID
+    BodyScriptsHeader: Scripts
+    BodyScripts: Script

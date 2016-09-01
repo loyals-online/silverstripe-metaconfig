@@ -1,0 +1,34 @@
+{
+  "name": "mediaweb/silverstripe-metaconfig",
+  "description": "An inclusive plugin to handle certain types of meta data through the siteconfig, as well as better and expanded handling of meta data in general",
+  "type": "silverstripe-module",
+  "keywords": [
+    "silverstripe",
+    "metadata",
+    "module",
+    "cms",
+    "opengraph"
+  ],
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "Martijn Schenk",
+      "email": "martijnschenk@loyals.nl"
+    },
+    {
+      "name": "Martijn van Nieuwenhoven",
+      "email": "info@axyrmedia.nl"
+    },
+    {
+      "name": "Gabrijel Gavranović",
+      "email": "ggavranovic@mediaweb.nl"
+    }
+  ],
+  "require": {
+    "silverstripe/framework": "~3.1"
+  },
+  "extra": {
+    "installer-name": "metaconfig"
+  },
+  "target-dir": "metaconfig"
+}

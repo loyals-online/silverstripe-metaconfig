@@ -1,0 +1,8 @@
+div.countable-counter {
+    width      : 512px;
+    text-align : right;
+}
+
+div.countable-counter.input {
+    margin: 4px 0 0;
+}

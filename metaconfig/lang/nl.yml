@@ -1,0 +1,22 @@
+nl:
+  MetaManager:
+    GENERATEMETADATA: 'Genereer Meta-data automatisch uit de inhoud van de pagina'
+  SiteConfig:
+    OrganizationDetails: Organisatiegegevens
+    Organization: Organisate
+    BusinessType: Bedrijfstype
+    Address: Adres
+    Postcode: Postcode
+    City: Plaats
+    Phonenumber: Telefoonnummer
+    EmailAddress: 'Email-adres'
+    TwitterUser: 'Twitter gebruikersnaam'
+    SocialMedia: 'Sociale media'
+    FacebookPageLink: 'Facebook pagina link'
+    TwitterLink: 'Twitter link'
+    YoutubeLink: 'Youtube kanaal link'
+    Google: Google
+    GoogleAnalyticsID: Google Analytics ID
+    GoogleTagManagerID: Google Tag Manager ID
+    BodyScriptsHeader: Scripts
+    BodyScripts: Script

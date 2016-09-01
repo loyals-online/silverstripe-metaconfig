@@ -1,0 +1,15 @@
+---
+name: 'metaconfig'
+---
+
+SiteTree:
+  extensions:
+    - MetaManagerExtension
+
+SiteConfig:
+  extensions:
+    - MetaConfigSiteConfigExtension
+
+Page:
+  extensions:
+    - MetaConfigPageExtension
