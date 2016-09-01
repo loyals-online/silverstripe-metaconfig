@@ -25,7 +25,7 @@
     }
   ],
   "require": {
-    "silverstripe/framework": "~3.1"
+    "silverstripe/framework": "~3.4"
   },
   "extra": {
     "installer-name": "metaconfig"
