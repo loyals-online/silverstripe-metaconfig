@@ -7,7 +7,7 @@
  * @Alias  Chibby
  * @Email  martijnschenk@loyals.nl
  */
-class SeoMasterPageExtension extends DataExtension
+class MetaConfigPageExtension extends DataExtension
 {
     /**
      * Cache for the page image

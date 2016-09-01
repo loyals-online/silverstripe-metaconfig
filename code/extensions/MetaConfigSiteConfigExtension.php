@@ -7,7 +7,7 @@
  * @Alias  Chibby
  * @Email  martijnschenk@loyals.nl
  */
-class MySiteConfigExtension extends DataExtension
+class MetaConfigSiteConfigExtension extends DataExtension
 {
     private static $db = array(
         'Organization'       => 'Varchar',
