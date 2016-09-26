@@ -1,0 +1,6 @@
+---
+Name: robotsroute
+---
+Director:
+  rules:
+    'robots.txt': 'Robots'
