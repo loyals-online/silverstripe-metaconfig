@@ -9,7 +9,7 @@
  */
 class MetaConfigSiteConfigExtension extends DataExtension
 {
-    private static $db = array(
+    private static $db = [
         'Organization'       => 'Varchar',
         'BusinessType'       => 'Varchar',
         'Address'            => 'Varchar',
@@ -30,7 +30,7 @@ class MetaConfigSiteConfigExtension extends DataExtension
 
         'RobotsText' => 'Text',
 
-    );
+    ];
 
     private static $has_one = [
         'Image' => 'Image',
