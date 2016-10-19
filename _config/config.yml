@@ -13,7 +13,3 @@ SiteConfig:
 Page:
   extensions:
     - MetaConfigPageExtension
-
-Security:
-  extensions:
-    - MetaConfigPageExtension

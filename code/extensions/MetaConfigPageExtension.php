@@ -325,14 +325,4 @@ class MetaConfigPageExtension extends DataExtension
         }
         return false;
     }
-
-    /**
-     * Returns true if the uploader is being used in CMS context
-     *
-     * @return boolean
-     */
-    protected function isCMS()
-    {
-        return Controller::curr() instanceof LeftAndMain;
-    }
 }
