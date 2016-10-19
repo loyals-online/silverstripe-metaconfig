@@ -33,6 +33,6 @@
             j.src =
                     '//www.googletagmanager.com/gtm.js?id=' + i + dl;
             f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'myNewName', '$TagManagerID');
+        })(window, document, 'script', 'dataLayer', '$TagManagerID');
     </script>
 <% end_if %>
