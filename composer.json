@@ -7,7 +7,8 @@
     "metadata",
     "module",
     "cms",
-    "opengraph"
+    "opengraph",
+    "robots"
   ],
   "license": "BSD-3-Clause",
   "authors": [
@@ -22,10 +23,15 @@
     {
       "name": "Gabrijel Gavranović",
       "email": "ggavranovic@mediaweb.nl"
+    },
+    {
+      "name": "Jan-Pieter van der Poel",
+      "email": "jp@loyals.nl"
     }
   ],
   "require": {
-    "silverstripe/framework": "~3.4"
+    "silverstripe/framework": "~3.4",
+    "silverstripe/cms": "~3.4"
   },
   "extra": {
     "installer-name": "metaconfig"

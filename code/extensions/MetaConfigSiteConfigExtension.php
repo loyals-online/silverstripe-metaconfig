@@ -9,7 +9,7 @@
  */
 class MetaConfigSiteConfigExtension extends DataExtension
 {
-    private static $db = array(
+    private static $db = [
         'Organization'       => 'Varchar',
         'BusinessType'       => 'Varchar',
         'Address'            => 'Varchar',
@@ -27,7 +27,10 @@ class MetaConfigSiteConfigExtension extends DataExtension
         'GoogleTagManagerID' => 'Varchar',
 
         'BodyScripts'        => 'Text',
-    );
+
+        'RobotsText' => 'Text',
+
+    ];
 
     private static $has_one = [
         'Image' => 'Image',
@@ -62,6 +65,10 @@ class MetaConfigSiteConfigExtension extends DataExtension
 
             HeaderField::create(_t('SiteConfig.BodyScriptsHeader', 'Scripts')),
             TextareaField::create('BodyScripts', _t('SiteConfig.BodyScripts', 'Body Scripts'))
+                ->setRows(20),
+
+            HeaderField::create(_t('SiteConfig.RobotTextsHeader', 'Robots')),
+            TextareaField::create('RobotsText', _t('SiteConfig.RobotsText', 'Robots.txt'))
                 ->setRows(20),
         ));
 
