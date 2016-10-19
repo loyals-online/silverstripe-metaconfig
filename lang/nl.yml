@@ -20,3 +20,5 @@ nl:
     GoogleTagManagerID: Google Tag Manager ID
     BodyScriptsHeader: Scripts
     BodyScripts: Script
+    RobotTextsHeader: Robots
+    RobotsText: Robots.txt

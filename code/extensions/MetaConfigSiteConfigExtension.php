@@ -19,16 +19,20 @@ class MetaConfigSiteConfigExtension extends DataExtension
         'EmailAddress'       => 'Varchar',
         'TwitterUser'        => 'Varchar',
 
+        // social
         'FacebookPageLink'   => 'Varchar',
         'TwitterLink'        => 'Varchar',
         'YoutubeLink'        => 'Varchar',
 
+        // google
         'GoogleAnalyticsID'  => 'Varchar',
         'GoogleTagManagerID' => 'Varchar',
 
+        // javascript
         'BodyScripts'        => 'Text',
 
-        'RobotsText' => 'Text',
+        // robots
+        'RobotsText'         => 'Text',
 
     ];
 
