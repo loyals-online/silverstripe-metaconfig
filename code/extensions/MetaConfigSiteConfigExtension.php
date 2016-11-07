@@ -23,6 +23,7 @@ class MetaConfigSiteConfigExtension extends DataExtension
         'FacebookPageLink'   => 'Varchar',
         'TwitterLink'        => 'Varchar',
         'YoutubeLink'        => 'Varchar',
+        'LinkedInLink'       => 'Varchar',
 
         // google
         'GoogleAnalyticsID'  => 'Varchar',
@@ -44,7 +45,7 @@ class MetaConfigSiteConfigExtension extends DataExtension
     {
         $fields->removeByName('Theme');
 
-        $fields->addFieldsToTab("Root.Main", array(
+        $fields->addFieldsToTab("Root.Main", [
             HeaderField::create(_t('SiteConfig.OrganizationDetails', 'Organization details')),
             TextField::create('Organization', _t('SiteConfig.Organization', 'Organization')),
             TextField::create('BusinessType', _t('SiteConfig.BusinessType', 'Business type')),
@@ -62,6 +63,7 @@ class MetaConfigSiteConfigExtension extends DataExtension
             TextField::create('FacebookPageLink', _t('SiteConfig.FacebookPageLink', 'Facebook page link')),
             TextField::create('TwitterLink', _t('SiteConfig.TwitterLink', 'Twitter link')),
             TextField::create('YoutubeLink', _t('SiteConfig.YoutubeLink', 'Youtube channel link')),
+            TextField::create('LinkedInLink', _t('SiteConfig.LinkedInLink', 'LinkedIn page link')),
 
             HeaderField::create(_t('SiteConfig.Google', 'Google')),
             TextField::create('GoogleAnalyticsID', _t('SiteConfig.GoogleAnalyticsID', 'Google Analytics ID')),
@@ -74,7 +76,7 @@ class MetaConfigSiteConfigExtension extends DataExtension
             HeaderField::create(_t('SiteConfig.RobotTextsHeader', 'Robots')),
             TextareaField::create('RobotsText', _t('SiteConfig.RobotsText', 'Robots.txt'))
                 ->setRows(20),
-        ));
+        ]);
 
         return $fields;
     }
