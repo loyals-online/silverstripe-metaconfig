@@ -155,7 +155,7 @@ class MetaConfigPageExtension extends DataExtension
         return $template->process($this->owner->customise(new ArrayData([
             'Title'       => $this->owner->Title,
             'Type'        => 'website',
-            'Image'       => ($image ? Director::absoluteBaseURL() . $image->FocusCropHeight(249)
+            'Image'       => ($image ? Director::absoluteBaseURL() . $image->CropHeight(249)
                     ->Link() : null),
             'Url'         => $this->owner->AbsoluteLink(),
             'SiteName'    => $siteConfig->Title,
@@ -185,7 +185,7 @@ class MetaConfigPageExtension extends DataExtension
         return $template->process($this->owner->customise(new ArrayData([
             'Type'        => $product ? 'summary_large_image' : 'summary',
             'Title'       => $product ? $product->Title : $this->owner->Title,
-            'Image'       => Director::absoluteBaseURL() . $image->FocusCropHeight($product ? '281' : '125')
+            'Image'       => Director::absoluteBaseURL() . $image->CropHeight($product ? '281' : '125')
                     ->Link(),
             'TwitterUser' => $siteConfig->TwitterUser,
             'Description' => $product ?
