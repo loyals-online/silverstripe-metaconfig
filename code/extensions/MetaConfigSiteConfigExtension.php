@@ -19,6 +19,11 @@ class MetaConfigSiteConfigExtension extends DataExtension
         'EmailAddress'       => 'Varchar(255)',
         'TwitterUser'        => 'Varchar',
 
+        // business
+        'COCNumber'          => 'Varchar', // Chamber of Commerce / KvK
+        'VatNumber'          => 'Varchar', // Value Added Tax / BTW
+        'IBAN'               => 'Varchar',
+
         // social
         'FacebookPageLink'   => 'Varchar(255)',
         'TwitterLink'        => 'Varchar(255)',
@@ -58,6 +63,11 @@ class MetaConfigSiteConfigExtension extends DataExtension
             UploadField::create('Image', _t('SiteConfig.DefaultImage', 'Default image'))
                 ->setFolderName('fallback')
                 ->setDisplayFolderName('fallback'),
+
+            HeaderField::create(_t('SiteConfig.Business', 'Business data')),
+            TextField::create('COCNumber', _t('SiteConfig.COCNumber', 'CoC Number')),
+            TextField::create('VATNumber', _t('SiteConfig.VATNumber', 'Vat Number')),
+            TextField::create('IBAN', _t('SiteConfig.IBAN', 'IBAN')),
 
             HeaderField::create(_t('SiteConfig.SocialMedia', 'Social media')),
             TextField::create('FacebookPageLink', _t('SiteConfig.FacebookPageLink', 'Facebook page link')),

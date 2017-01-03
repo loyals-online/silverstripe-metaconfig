@@ -23,3 +23,7 @@ en:
     BodyScripts: Script
     RobotTextsHeader: Robots
     RobotsText: Robots.txt
+    Business: 'Business data'
+    COCNumber: 'CoC number'
+    VATNumber: 'Vat number'
+    IBAN: IBAN

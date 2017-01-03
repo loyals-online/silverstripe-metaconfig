@@ -23,3 +23,7 @@ nl:
     BodyScripts: Script
     RobotTextsHeader: Robots
     RobotsText: Robots.txt
+    Business: Bedrijfsgegevens
+    COCNumber: 'KvK nummer'
+    VATNumber: 'BTW nummer'
+    IBAN: IBAN
