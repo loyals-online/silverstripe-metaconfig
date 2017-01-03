@@ -16,14 +16,14 @@ class MetaConfigSiteConfigExtension extends DataExtension
         'Postcode'           => 'Varchar',
         'City'               => 'Varchar',
         'Phonenumber'        => 'Varchar',
-        'EmailAddress'       => 'Varchar',
+        'EmailAddress'       => 'Varchar(255)',
         'TwitterUser'        => 'Varchar',
 
         // social
-        'FacebookPageLink'   => 'Varchar',
-        'TwitterLink'        => 'Varchar',
-        'YoutubeLink'        => 'Varchar',
-        'LinkedInLink'       => 'Varchar',
+        'FacebookPageLink'   => 'Varchar(255)',
+        'TwitterLink'        => 'Varchar(255)',
+        'YoutubeLink'        => 'Varchar(255)',
+        'LinkedInLink'       => 'Varchar(255)',
 
         // google
         'GoogleAnalyticsID'  => 'Varchar',
