@@ -238,9 +238,10 @@ class MetaConfigPageExtension extends DataExtension
     public function GoogleBreadcrumbs()
     {
         $template = new SSViewer('GoogleBreadcrumbs');
+        $breadcrumbs = $this->getGoogleBreadcrumbs();
 
         return $template->process($this->owner->customise(new ArrayData([
-            'JSON' => json_encode($this->getGoogleBreadcrumbs()),
+            'JSON' => $breadcrumbs ? json_encode($breadcrumbs) : false,
         ])));
     }
 
@@ -251,9 +252,21 @@ class MetaConfigPageExtension extends DataExtension
      */
     protected function getGoogleBreadcrumbs()
     {
+        /** @var ArrayList $crumbs */
         $crumbs = $this->owner->getBreadcrumbItems(20, false, true);
 
         if (!$crumbs) {
+            return false;
+        }
+
+        // fetch the first page in this list
+        $home = $crumbs->shift();
+        // if it's not the homepage, just return it, no worries
+        if ($home->Link() != '/home/') {
+            $crumbs->unshift($home);
+        }
+
+        if (!$crumbs->Count()) {
             return false;
         }
 
