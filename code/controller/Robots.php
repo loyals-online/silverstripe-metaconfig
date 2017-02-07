@@ -25,6 +25,13 @@ class Robots extends Controller
     {
         $siteConfig = SiteConfig::current_site_config();
 
+        if(class_exists('Translatable')) {
+            $hostlocale = $siteConfig->getLocaleFromHost($_SERVER['HTTP_HOST']);
+
+            Translatable::set_current_locale($hostlocale);
+            i18n::set_locale($hostlocale);
+        }
+
         //check of empty, if so, generate and save
         if (!$siteConfig->RobotsText) {
             $siteConfig->RobotsText = $this->generateText();

@@ -46,6 +46,9 @@ class MetaConfigSiteConfigExtension extends DataExtension
         'Image' => 'Image',
     ];
 
+    private static $language_config;
+    private static $current_locale;
+
     public function updateCMSFields(FieldList $fields)
     {
         $fields->removeByName('Theme');
@@ -89,5 +92,69 @@ class MetaConfigSiteConfigExtension extends DataExtension
         ]);
 
         return $fields;
+    }
+
+    public function getSiteDomain()
+    {
+        if ($config = $this->getLangConfig()) {
+            return $config['domain'];
+        }
+    }
+
+    public function getSiteDescription()
+    {
+        if ($config = $this->getLangConfig()) {
+            return $config['description'];
+        }
+    }
+
+    public function getLocaleFromHost($host = null)
+    {
+        if ($host && $locale = $this->SearchLocale($host)) {
+            return $locale;
+        }
+    }
+
+    public function getDomainLocales()
+    {
+        if (!self::$language_config) {
+            $config = Config::inst()
+                ->get('Environment', 'default');
+
+            if (isset($config['DomainLocales'])) {
+                self::$language_config = $config['DomainLocales'];
+            }
+        }
+
+        return self::$language_config;
+    }
+
+    public function getLangConfig()
+    {
+        $config = $this->getDomainLocales();
+
+        if ($config && isset($config[$this->getCurrentLocale()])) {
+            return $config[$this->getCurrentLocale()];
+        }
+    }
+
+    public function getCurrentLocale()
+    {
+        if (!self::$current_locale && class_exists('Translatable')) {
+            self::$current_locale = Translatable::get_current_locale();
+        }
+
+        return self::$current_locale;
+    }
+
+    protected function SearchLocale($searchdomain = null)
+    {
+        if ($searchdomain && $config = $this->getDomainLocales()) {
+            foreach ($config as $locale => $domain) {
+                if ($domain['domain'] === $searchdomain) {
+                    return $locale;
+                }
+            }
+        }
     }
 }
