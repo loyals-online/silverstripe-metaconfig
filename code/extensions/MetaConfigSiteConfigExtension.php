@@ -69,7 +69,7 @@ class MetaConfigSiteConfigExtension extends DataExtension
 
             HeaderField::create(_t('SiteConfig.Business', 'Business data')),
             TextField::create('COCNumber', _t('SiteConfig.COCNumber', 'CoC Number')),
-            TextField::create('VATNumber', _t('SiteConfig.VATNumber', 'Vat Number')),
+            TextField::create('VatNumber', _t('SiteConfig.VATNumber', 'Vat Number')),
             TextField::create('IBAN', _t('SiteConfig.IBAN', 'IBAN')),
 
             HeaderField::create(_t('SiteConfig.SocialMedia', 'Social media')),
