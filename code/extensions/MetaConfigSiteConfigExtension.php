@@ -10,25 +10,26 @@
 class MetaConfigSiteConfigExtension extends DataExtension
 {
     private static $db = [
-        'Organization'       => 'Varchar',
-        'BusinessType'       => 'Varchar',
-        'Address'            => 'Varchar',
-        'Postcode'           => 'Varchar',
-        'City'               => 'Varchar',
-        'Phonenumber'        => 'Varchar',
-        'EmailAddress'       => 'Varchar(255)',
-        'TwitterUser'        => 'Varchar',
+        'Organization'     => 'Varchar',
+        'BusinessType'     => 'Varchar',
+        'Address'          => 'Varchar',
+        'Postcode'         => 'Varchar',
+        'City'             => 'Varchar',
+        'Phonenumber'      => 'Varchar',
+        'EmailAddress'     => 'Varchar(255)',
+        'TwitterUser'      => 'Varchar',
 
         // business
-        'COCNumber'          => 'Varchar', // Chamber of Commerce / KvK
-        'VatNumber'          => 'Varchar', // Value Added Tax / BTW
-        'IBAN'               => 'Varchar',
+        'COCNumber'        => 'Varchar', // Chamber of Commerce / KvK
+        'VatNumber'        => 'Varchar', // Value Added Tax / BTW
+        'IBAN'             => 'Varchar',
 
         // social
-        'FacebookPageLink'   => 'Varchar(255)',
-        'TwitterLink'        => 'Varchar(255)',
-        'YoutubeLink'        => 'Varchar(255)',
-        'LinkedInLink'       => 'Varchar(255)',
+        'FacebookPageLink' => 'Varchar(255)',
+        'TwitterLink'      => 'Varchar(255)',
+        'YoutubeLink'      => 'Varchar(255)',
+        'LinkedInLink'     => 'Varchar(255)',
+        'InstagramLink'    => 'Varchar(255)',
 
         // google
         'GoogleAnalyticsID'  => 'Varchar',
@@ -77,6 +78,7 @@ class MetaConfigSiteConfigExtension extends DataExtension
             TextField::create('TwitterLink', _t('SiteConfig.TwitterLink', 'Twitter link')),
             TextField::create('YoutubeLink', _t('SiteConfig.YoutubeLink', 'Youtube channel link')),
             TextField::create('LinkedInLink', _t('SiteConfig.LinkedInLink', 'LinkedIn page link')),
+            TextField::create('InstagramLink', _t('SiteConfig.InstagramLink', 'Instagram page link')),
 
             HeaderField::create(_t('SiteConfig.Google', 'Google')),
             TextField::create('GoogleAnalyticsID', _t('SiteConfig.GoogleAnalyticsID', 'Google Analytics ID')),
