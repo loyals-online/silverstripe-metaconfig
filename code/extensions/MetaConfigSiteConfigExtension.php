@@ -121,7 +121,7 @@ class MetaConfigSiteConfigExtension extends DataExtension
     {
         if (!self::$language_config) {
             $config = Config::inst()
-                ->get('Environment', 'default');
+                ->get('Environment', 'current');
 
             if (isset($config['DomainLocales'])) {
                 self::$language_config = $config['DomainLocales'];
