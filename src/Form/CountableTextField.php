@@ -18,8 +18,8 @@ class CountableTextField extends TextField
     {
         $this->addExtraClass('countable text');
 
-        Requirements::javascript('eha/metaconfig:javascript/countable.js');
-        Requirements::css('eha/metaconfig:css/countable.css');
+        Requirements::javascript('loyals/metaconfig:javascript/countable.js');
+        Requirements::css('loyals/metaconfig:css/countable.css');
 
         return parent::Field($properties);
     }

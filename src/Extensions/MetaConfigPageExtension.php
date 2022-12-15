@@ -110,6 +110,7 @@ class MetaConfigPageExtension extends DataExtension
     public function GoogleRichSnippetLocalBusiness()
     {
         $siteConfig = $this->getSiteConfig();
+        $image = $this->getPageImage();
 
         $addressString = urlencode(
             sprintf(
@@ -125,8 +126,8 @@ class MetaConfigPageExtension extends DataExtension
         $snippet = [
             '@context' => 'http://schema.org',
             '@type'    => 'LocalBusiness',
-            'image'    => Director::absoluteURL('/themes/EHA/img/icons/og-image-200x200.png'), // we'll need to fix this
-            'logo'     => Director::absoluteURL('/themes/EHA/img/icons/og-image-200x200.png'), // we'll need to fix this
+            'image'    => $image ? Director::absoluteBaseURL() . $image->Link() : null, // we'll need to fix this
+            'logo'     => $image ? Director::absoluteBaseURL() . $image->Link() : null, // we'll need to fix this
             '@id'      => Director::absoluteBaseURL(),
             'name'     => $siteConfig->Organization,
             'address'  => [
