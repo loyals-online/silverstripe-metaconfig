@@ -2,14 +2,14 @@
 name: 'metaconfig'
 ---
 
-SiteTree:
+SilverStripe\CMS\Model\SiteTree:
   extensions:
-    - MetaManagerExtension
+    - Loyals\MetaConfig\Extensions\MetaManagerExtension
 
-SiteConfig:
+SilverStripe\SiteConfig\SiteConfig:
   extensions:
-    - MetaConfigSiteConfigExtension
+    - Loyals\MetaConfig\Extensions\MetaConfigSiteConfigExtension
 
 Page:
   extensions:
-    - MetaConfigPageExtension
+    - Loyals\MetaConfig\Extensions\MetaConfigPageExtension

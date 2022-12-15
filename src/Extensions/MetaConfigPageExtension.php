@@ -1,5 +1,23 @@
 <?php
 
+namespace Loyals\MetaConfig\Extensions;
+
+use SilverStripe\Assets\Image;
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\FieldType\DBHTMLText;
+use SilverStripe\SiteConfig\SiteConfig;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\CompositeField;
+use SilverStripe\Forms\FieldGroup;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Control\Director;
+use SilverStripe\Control\Controller;
+use SilverStripe\Core\Convert;
+use Loyals\MetaConfig\Model\GoogleGeocoding;
+use SilverStripe\View\SSViewer;
+use SilverStripe\View\ArrayData;
+
 /**
  * Extension for Page that adds a lot of meta functionality
  *
@@ -28,15 +46,15 @@ class MetaConfigPageExtension extends DataExtension
      *
      * @var array
      */
-    private static $db = array(
-        'NoIndex'           => 'Boolean',
-        'NoFollow'          => 'Boolean',
-    );
+    private static $db = [
+        'NoIndex'  => 'Boolean',
+        'NoFollow' => 'Boolean',
+    ];
 
     /**
      * Retrieve the site config
      *
-     * @return \DataObject
+     * @return DataObject
      */
     protected function getSiteConfig()
     {
@@ -50,7 +68,7 @@ class MetaConfigPageExtension extends DataExtension
     /**
      * Update the settings tab
      *
-     * @param \FieldList
+     * @param FieldList
      */
     public function updateSettingsFields(FieldList &$fields)
     {
@@ -87,28 +105,30 @@ class MetaConfigPageExtension extends DataExtension
     /**
      * Generate a Google Rich Snippet for Local Business
      *
-     * @return \HTMLText
+     * @return DBHTMLText
      */
     public function GoogleRichSnippetLocalBusiness()
     {
         $siteConfig = $this->getSiteConfig();
-        $image      = $this->getPageImage();
 
-        $addressString = urlencode(sprintf(
-            '%1$s, %2$s, %3$s, NL',
-            $siteConfig->Address,
-            $siteConfig->City,
-            $siteConfig->Postcode
-        ));
+        $addressString = urlencode(
+            sprintf(
+                '%1$s, %2$s, %3$s, NL',
+                $siteConfig->Address,
+                $siteConfig->City,
+                $siteConfig->Postcode
+            )
+        );
 
         $geocoding = GoogleGeocoding::getOrCreateGeocode($addressString);
 
         $snippet = [
             '@context' => 'http://schema.org',
-            '@type'    => $siteConfig->BusinessType,
-            'image'    => $image ? Director::absoluteBaseURL() . $image->Link() : null, // we'll need to fix this
+            '@type'    => 'LocalBusiness',
+            'image'    => Director::absoluteURL('/themes/EHA/img/icons/og-image-200x200.png'), // we'll need to fix this
+            'logo'     => Director::absoluteURL('/themes/EHA/img/icons/og-image-200x200.png'), // we'll need to fix this
             '@id'      => Director::absoluteBaseURL(),
-            'name'     => $siteConfig->Title,
+            'name'     => $siteConfig->Organization,
             'address'  => [
                 '@type'           => 'PostalAddress',
                 'streetAddress'   => $siteConfig->Address,
@@ -117,6 +137,17 @@ class MetaConfigPageExtension extends DataExtension
                 'addressCountry'  => 'NL',
             ],
         ];
+
+        /** @var Image $image */
+        if (($image = SiteConfig::current_site_config()
+                ->Image()) && $image->exists()) {
+            $snippet['logo'] = $image->AbsoluteLink();
+        }
+
+        /** @var Image $image */
+        if (($image = $this->getPageImage()) && $image->exists()) {
+            $snippet['image'] = $image->AbsoluteLink();
+        }
 
         if ($geocoding) {
             $snippet['geo'] = [
@@ -131,15 +162,21 @@ class MetaConfigPageExtension extends DataExtension
 
         $template = new SSViewer('GoogleRichSnippetLocalBusiness');
 
-        return $template->process($this->owner->customise(new ArrayData([
-            "JSON" => json_encode($snippet),
-        ])));
+        return $template->process(
+            $this->owner->customise(
+                new ArrayData(
+                    [
+                        "JSON" => json_encode($snippet),
+                    ]
+                )
+            )
+        );
     }
 
     /**
      * Generate OpenGraph meta data
      *
-     * @return \HTMLText
+     * @return DBHTMLText
      */
     public function OpenGraph()
     {
@@ -155,8 +192,9 @@ class MetaConfigPageExtension extends DataExtension
         return $template->process($this->owner->customise(new ArrayData([
             'Title'       => $this->owner->Title,
             'Type'        => 'website',
-            'Image'       => ($image ? Director::absoluteBaseURL() . $image->CropHeight(249)
-                    ->Link() : null),
+            'Image'       => ($image && $image->exists() && ($croppedImage = $image->CropHeight(249))
+                ? $croppedImage->getAbsoluteURL()
+                : null),
             'Url'         => $this->owner->AbsoluteLink(),
             'SiteName'    => $siteConfig->Title,
             'ThemeDir'    => $this->owner->ThemeDir(),
@@ -169,7 +207,7 @@ class MetaConfigPageExtension extends DataExtension
     /**
      * Generate a Twitter Summary Card
      *
-     * @return \HTMLText
+     * @return DBHTMLText
      */
     public function TwitterSummaryCard()
     {
@@ -185,8 +223,9 @@ class MetaConfigPageExtension extends DataExtension
         return $template->process($this->owner->customise(new ArrayData([
             'Type'        => $product ? 'summary_large_image' : 'summary',
             'Title'       => $product ? $product->Title : $this->owner->Title,
-            'Image'       => Director::absoluteBaseURL() . $image->CropHeight($product ? '281' : '125')
-                    ->Link(),
+            'Image'       => ($image && $image->exists() && ($croppedImage = $image->CropHeight($product ? '281' : '125'))
+                ? $croppedImage->getAbsoluteURL()
+                : null),
             'TwitterUser' => $siteConfig->TwitterUser,
             'Description' => $product ?
                 $product->MetaDescription :
@@ -216,7 +255,7 @@ class MetaConfigPageExtension extends DataExtension
     /**
      * Retrieve the Google scripts for this page
      *
-     * @return \HTMLText
+     * @return DBHTMLText
      */
     public function GoogleScripts()
     {
@@ -233,15 +272,14 @@ class MetaConfigPageExtension extends DataExtension
     /**
      * Retrieve the Google breadcrumbs for this page
      *
-     * @return \HTMLText
+     * @return DBHTMLText
      */
     public function GoogleBreadcrumbs()
     {
         $template = new SSViewer('GoogleBreadcrumbs');
-        $breadcrumbs = $this->getGoogleBreadcrumbs();
 
         return $template->process($this->owner->customise(new ArrayData([
-            'JSON' => $breadcrumbs ? json_encode($breadcrumbs) : false,
+            'JSON' => json_encode($this->getGoogleBreadcrumbs()),
         ])));
     }
 
@@ -252,21 +290,9 @@ class MetaConfigPageExtension extends DataExtension
      */
     protected function getGoogleBreadcrumbs()
     {
-        /** @var ArrayList $crumbs */
         $crumbs = $this->owner->getBreadcrumbItems(20, false, true);
 
         if (!$crumbs) {
-            return false;
-        }
-
-        // fetch the first page in this list
-        $home = $crumbs->shift();
-        // if it's not the homepage, just return it, no worries
-        if ($home->Link() != '/home/') {
-            $crumbs->unshift($home);
-        }
-
-        if (!$crumbs->Count()) {
             return false;
         }
 
@@ -300,7 +326,7 @@ class MetaConfigPageExtension extends DataExtension
     /**
      * Retrieve the canonical, next and previous link tags
      *
-     * @return \HTMLText
+     * @return DBHTMLText
      */
     public function Canonical()
     {

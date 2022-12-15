@@ -1,5 +1,25 @@
 <?php
 
+namespace Loyals\MetaConfig\Extensions;
+
+use SilverStripe\CMS\Model\SiteTreeExtension;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\ToggleCompositeField;
+use SilverStripe\Forms\CheckboxField;
+use Loyals\MetaConfig\Form\CountableTextField;
+use Loyals\MetaConfig\Form\CountableTextareaField;
+use Loyals\MetaConfig\Service\MetaGenerator;
+use SilverStripe\Core\Convert;
+use SilverStripe\SiteConfig\SiteConfig;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Security\Permission;
+use SilverStripe\ErrorPage\ErrorPage;
+use SilverStripe\Control\Director;
+use SilverStripe\Control\ContentNegotiator;
+use SilverStripe\ORM\CMSPreviewable;
+use SilverStripe\CMS\Model\VirtualPage;
+
+
 /**
  * Adds autoupdate of the metadatafields on pagesave.
  * A checkbox is added to the Main Content tab to select wether to update the MetaDescription and MetaKeyword fields on
@@ -146,7 +166,7 @@ class MetaManagerExtension extends SiteTreeExtension
                     : $this->owner->Title) . " - " . Convert::raw2xml(SiteConfig::current_site_config()->Title) . "</title>";
         }
 
-        $charset = Config::inst()->get('ContentNegotiator', 'encoding');
+        $charset = Config::inst()->get(ContentNegotiator::class, 'encoding');
         $metatags['ContentType'] = "<meta http-equiv=\"Content-type\" content=\"text/html; charset=$charset\" />";
         if ($this->owner->MetaDescription) {
             $metatags['MetaDescription'] = "<meta name=\"description\" content=\"" . Convert::raw2att($this->owner->MetaDescription) . "\" />";
@@ -155,7 +175,7 @@ class MetaManagerExtension extends SiteTreeExtension
             $metatags['ExtraMeta'] = $this->owner->ExtraMeta;
         }
 
-        if (Permission::check('CMS_ACCESS_CMSMain') && in_array('CMSPreviewable',
+        if (Permission::check('CMS_ACCESS_CMSMain') && in_array(CMSPreviewable::class,
                 class_implements($this->owner)) && !$this->owner instanceof ErrorPage
         ) {
             $metatags['x-page-id'] = "<meta name=\"x-page-id\" content=\"{$this->owner->ID}\" />";
@@ -168,7 +188,8 @@ class MetaManagerExtension extends SiteTreeExtension
             $metatags['robots'] = "<meta name=\"robots\" content=\"noindex,nofollow\" />";
         }
 
-        if ($this->owner->Classname === 'VirtualPage' && $this->owner->CopyContentFrom()->ID) {
+        $className = $this->getClassShortName(get_class($this->owner));
+        if ($className === VirtualPage::class && $this->owner->CopyContentFrom()->ID) {
             $metatags['canonical'] = "<link rel=\"canonical\" href=\"{$this->owner->CopyContentFrom()->Link()}\" />\n";
         }
 
@@ -176,5 +197,22 @@ class MetaManagerExtension extends SiteTreeExtension
         $this->owner->extend('updateMetaTags', $metatags);
 
         $tags = implode("\n", $metatags);
+    }
+
+    /**
+     * @param $className
+     * @return string
+     */
+    protected function getClassShortName($className)
+    {
+        try {
+            $reflect = new ReflectionClass($className ?? '');
+            return $reflect->getShortName();
+        } catch (ReflectionException $e) {
+        }
+
+        // fallback
+        $parts = explode('\\', $className ?? '');
+        return array_shift($parts);
     }
 }

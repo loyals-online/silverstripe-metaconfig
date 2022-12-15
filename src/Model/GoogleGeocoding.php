@@ -1,5 +1,10 @@
 <?php
 
+namespace Loyals\MetaConfig\Model;
+
+use SilverStripe\ORM\DataObject;
+use SilverStripe\Core\Config\Config;
+
 /*
  * @TODO Move this to it's own extension, and require this via composer
  */
@@ -12,6 +17,8 @@
  */
 class GoogleGeocoding extends DataObject
 {
+    private static $table_name = 'GoogleGeocoding';
+
     /**
      * The endpoint for the Google URL Shortener API
      *
@@ -42,7 +49,7 @@ class GoogleGeocoding extends DataObject
      *
      * @param $longURL
      *
-     * @return \DataObject|static
+     * @return DataObject|static
      */
     public static function getOrCreateGeocode($addressString)
     {

@@ -1,5 +1,14 @@
 <?php
 
+namespace Loyals\MetaConfig\Controller;
+
+use SilverStripe\Control\Controller;
+use SilverStripe\Control\Director;
+use SilverStripe\SiteConfig\SiteConfig;
+use SilverStripe\Control\HTTPResponse;
+use SilverStripe\CMS\Model\SiteTree;
+
+
 /**
  * Provides robots.txt functionality
  */
@@ -19,18 +28,12 @@ class Robots extends Controller
     /**
      * Generates the response containing the robots.txt content
      *
-     * @return SS_HTTPResponse
+     * @return HTTPResponse
+     * @throws \SilverStripe\ORM\ValidationException
      */
     public function index()
     {
         $siteConfig = SiteConfig::current_site_config();
-
-        if(class_exists('Translatable')) {
-            $hostlocale = $siteConfig->getLocaleFromHost($_SERVER['HTTP_HOST']);
-
-            Translatable::set_current_locale($hostlocale);
-            i18n::set_locale($hostlocale);
-        }
 
         //check of empty, if so, generate and save
         if (!$siteConfig->RobotsText) {
@@ -42,7 +45,7 @@ class Robots extends Controller
 
         $text = $siteConfig->RobotsText;
 
-        $response = new SS_HTTPResponse($text, 200);
+        $response = new HTTPResponse($text, 200);
         $response->addHeader("Content-Type", "text/plain; charset=\"utf-8\"");
 
         return $response;
@@ -79,7 +82,7 @@ class Robots extends Controller
         }
 
         // Skip sitemap if not available
-        if (!class_exists('GoogleSitemap') && !Director::fileExists($sitemap)) {
+        if (!class_exists(\Wilr\GoogleSitemaps\GoogleSitemap::class) && !Director::fileExists($sitemap)) {
             return '';
         }
 

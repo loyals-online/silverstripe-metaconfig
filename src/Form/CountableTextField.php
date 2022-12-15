@@ -1,5 +1,10 @@
 <?php
 
+namespace Loyals\MetaConfig\Form;
+
+use SilverStripe\Forms\TextField;
+use SilverStripe\View\Requirements;
+
 /**
  * Extension for TextField that adds a counter
  *
@@ -13,8 +18,8 @@ class CountableTextField extends TextField
     {
         $this->addExtraClass('countable text');
 
-        Requirements::javascript(METACONFIG_DIR . '/javascript/countable.js');
-        Requirements::css(METACONFIG_DIR . '/css/countable.css');
+        Requirements::javascript('eha/metaconfig:javascript/countable.js');
+        Requirements::css('eha/metaconfig:css/countable.css');
 
         return parent::Field($properties);
     }

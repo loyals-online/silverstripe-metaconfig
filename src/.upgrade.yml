@@ -1,0 +1,9 @@
+mappings:
+  Robots: Loyals\MetaConfig\Controller\Robots
+  MetaConfigPageExtension: Loyals\MetaConfig\Extensions\MetaConfigPageExtension
+  MetaConfigSiteConfigExtension: Loyals\MetaConfig\Extensions\MetaConfigSiteConfigExtension
+  MetaManagerExtension: Loyals\MetaConfig\Extensions\MetaManagerExtension
+  CountableTextField: Loyals\MetaConfig\Form\CountableTextField
+  CountableTextareaField: Loyals\MetaConfig\Form\CountableTextareaField
+  GoogleGeocoding: Loyals\MetaConfig\Model\GoogleGeocoding
+  MetaGenerator: Loyals\MetaConfig\Service\MetaGenerator

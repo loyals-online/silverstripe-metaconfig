@@ -1,7 +1,7 @@
 {
   "name": "mediaweb/silverstripe-metaconfig",
   "description": "An inclusive plugin to handle certain types of meta data through the siteconfig, as well as better and expanded handling of meta data in general",
-  "type": "silverstripe-module",
+  "type": "silverstripe-vendormodule",
   "keywords": [
     "silverstripe",
     "metadata",
@@ -22,7 +22,7 @@
     },
     {
       "name": "Gabrijel Gavranović",
-      "email": "ggavranovic@mediaweb.nl"
+      "email": "ggavranovic@gavro.nl"
     },
     {
       "name": "Jan-Pieter van der Poel",
@@ -30,11 +30,19 @@
     }
   ],
   "require": {
-    "silverstripe/framework": "~3.4",
-    "silverstripe/cms": "~3.4"
+    "php": "^7.4 || ^8.0",
+    "silverstripe/framework": "^4.0",
+    "silverstripe/cms": "^4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Loyals\\MetaConfig\\": "src/"
+    }
   },
   "extra": {
-    "installer-name": "metaconfig"
-  },
-  "target-dir": "metaconfig"
+    "expose": [
+      "css",
+      "javascript"
+    ]
+  }
 }

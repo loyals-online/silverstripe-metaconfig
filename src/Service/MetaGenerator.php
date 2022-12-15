@@ -1,5 +1,7 @@
 <?php
 
+namespace Loyals\MetaConfig\Service;
+
 /**
  * Static MetaGeneratorClass to generate keywords from whereever you need.
  * Returns a lowercase string with keywords ordered by occurance in content seperated with comma's
@@ -53,8 +55,12 @@ class MetaGenerator
 
         // calculate words again without the excluded words using str_word_count_utf8
         $words_array = self::str_word_count_utf8($new_string, 1);
-        $words_array = array_filter($words_array,
-            create_function('$var', 'return (strlen($var) >= ' . $min_word_char . ');'));
+        $words_array = array_filter(
+            $words_array,
+            function ($var) use ($min_word_char) {
+                return (strlen($var) >= $min_word_char);
+            }
+        );
 
         $popularity = [ ];
         $unique_words_array = array_unique($words_array);
@@ -68,7 +74,7 @@ class MetaGenerator
 
         }
 
-        usort($popularity, [ 'MetaGenerator', 'cmp' ]);
+        usort($popularity, [ MetaGenerator::class, 'cmp' ]);
 
         // sort array form higher to lower
         krsort($popularity);
