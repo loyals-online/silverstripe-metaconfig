@@ -35,7 +35,7 @@ class MetaGenerator
 
         $exclude_words = explode(", ", $exclude_words);
         //add space before br tags so words aren't concatenated when tags are stripped
-        $string = preg_replace('/\<br(\s*)?\/?\>/i', " <br />", $string);
+        $string = preg_replace('/\<br(\s*)?\/?\>/i', " <br />", $string ?? "");
         // get rid off the htmltags
         $string = html_entity_decode(strip_tags($string ?? ""), ENT_NOQUOTES, 'UTF-8');
 
