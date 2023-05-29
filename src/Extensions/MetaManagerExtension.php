@@ -206,7 +206,7 @@ class MetaManagerExtension extends SiteTreeExtension
     protected function getClassShortName($className)
     {
         try {
-            $reflect = new ReflectionClass($className ?? '');
+            $reflect = new \ReflectionClass($className ?? '');
             return $reflect->getShortName();
         } catch (ReflectionException $e) {
         }
