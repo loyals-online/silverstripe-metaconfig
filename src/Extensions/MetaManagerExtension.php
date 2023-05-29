@@ -114,9 +114,9 @@ class MetaManagerExtension extends SiteTreeExtension
         parent::onBeforeWrite();
 
         if ($this->owner->ID && $this->owner->GenerateMetaData) {
-            $this->owner->MetaTitle = strip_tags($this->owner->Title);
+            $this->owner->MetaTitle = strip_tags($this->owner->Title ?? "");
 
-            $this->owner->MetaDescription = html_entity_decode(strip_tags($this->owner->Content), ENT_COMPAT, 'UTF-8');
+            $this->owner->MetaDescription = html_entity_decode(strip_tags($this->owner->Content ?? ""), ENT_COMPAT, 'UTF-8');
             if (self::$meta_desc_length > 0 && strlen($this->owner->MetaDescription) > self::$meta_desc_length) {
                 $this->owner->MetaDescription = mb_substr($this->owner->MetaDescription,
                         0,

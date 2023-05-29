@@ -37,7 +37,7 @@ class MetaGenerator
         //add space before br tags so words aren't concatenated when tags are stripped
         $string = preg_replace('/\<br(\s*)?\/?\>/i', " <br />", $string);
         // get rid off the htmltags
-        $string = html_entity_decode(strip_tags($string), ENT_NOQUOTES, 'UTF-8');
+        $string = html_entity_decode(strip_tags($string ?? ""), ENT_NOQUOTES, 'UTF-8');
 
         // count all words with str_word_count_utf8
         $initial_words_array = self::str_word_count_utf8($string, 1);
