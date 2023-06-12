@@ -1,3 +1,12 @@
+<% if $Analytics4ID %>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=$Analytics4ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '$Analytics4ID');
+    </script>
+<% end_if %>
 <% if $TagManagerID %>
     <noscript>
         <iframe src="//www.googletagmanager.com/ns.html?id=$TagManagerID" height="0" width="0" style="display:none;visibility:hidden"></iframe>
@@ -17,7 +26,7 @@
             f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', '$TagManagerID');
     </script>
-<% else_if $AnalyticsID %>
+<% else_if $AnalyticsID && not $Analytics4ID %>
     <script type="text/javascript">
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;

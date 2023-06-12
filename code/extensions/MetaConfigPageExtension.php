@@ -225,6 +225,7 @@ class MetaConfigPageExtension extends DataExtension
         $template = new SSViewer('GoogleScripts');
 
         return $template->process($this->owner->customise(new ArrayData([
+            'Analytics4ID' => $siteConfig->GoogleAnalytics4ID,
             'AnalyticsID'  => $siteConfig->GoogleAnalyticsID,
             'TagManagerID' => $siteConfig->GoogleTagManagerID,
         ])));
