@@ -18,8 +18,8 @@ class CountableTextareaField extends TextareaField
     {
         $this->addExtraClass('countable textarea');
 
-        Requirements::javascript('loyals/metaconfig:javascript/countable.js');
-        Requirements::css('loyals/metaconfig:css/countable.css');
+        Requirements::javascript('mediaweb/silverstripe-metaconfig:javascript/countable.js');
+        Requirements::css('mediaweb/silverstripe-metaconfig:css/countable.css');
 
         return parent::Field($properties);
     }
