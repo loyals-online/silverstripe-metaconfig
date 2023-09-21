@@ -18,7 +18,8 @@ en:
     LinkedInLink: 'LinkedIn page link'
     InstagramLink: 'Instagram page link'
     Google: Google
-    GoogleAnalyticsID: Google Analytics ID
+    GoogleAnalyticsID: Google Analytics (UA) ID
+    GoogleAnalytics4ID: Google Analytics (GA4) ID
     GoogleTagManagerID: Google Tag Manager ID
     BodyScriptsHeader: Scripts
     BodyScripts: Script

@@ -43,6 +43,7 @@ class MetaConfigSiteConfigExtension extends DataExtension
         'InstagramLink'       => 'Varchar(255)',
 
         // google
+        'GoogleAnalytics4ID' => 'Varchar',
         'GoogleAnalyticsID'  => 'Varchar',
         'GoogleTagManagerID' => 'Varchar',
 
@@ -88,7 +89,9 @@ class MetaConfigSiteConfigExtension extends DataExtension
             TextField::create('InstagramLink', _t('SiteConfig.InstagramLink', 'Instagram page link')),
 
             HeaderField::create('Google', _t('SiteConfig.Google', 'Google')),
-            TextField::create('GoogleAnalyticsID', _t('SiteConfig.GoogleAnalyticsID', 'Google Analytics ID')),
+
+            TextField::create('GoogleAnalytics4ID', _t('SiteConfig.GoogleAnalytics4ID', 'Google Analytics (GA4) ID')),
+            TextField::create('GoogleAnalyticsID', _t('SiteConfig.GoogleAnalyticsID', 'Google Analytics (UA) ID')),
             TextField::create('GoogleTagManagerID', _t('SiteConfig.GoogleTagManagerID', 'Google Tag Manager ID')),
 
             HeaderField::create('Scripts', _t('SiteConfig.BodyScriptsHeader', 'Scripts')),
